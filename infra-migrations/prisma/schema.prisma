@@ -47,6 +47,7 @@ model Lead {
   qualificationScore Int     @default(0)
   aiConfidence      Float   @default(0.0)
   assignedTo        String?
+  assignedUser      User?   @relation(fields: [assignedTo], references: [id])
   tags              String[]
   notes             String[]
   

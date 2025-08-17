@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Database
   postgres:
@@ -52,72 +50,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-  # API Gateway
-  svc-api:
-    build:
-      context: ./svc-api
-      dockerfile: Dockerfile
-    container_name: sales-ai-api
-    ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: development
-      PORT: 3000
-      DATABASE_URL: postgresql://sales_ai_user:sales_ai_password@postgres:5432/sales_ai_platform
-      RABBITMQ_URL: amqp://sales_ai_user:sales_ai_password@rabbitmq:5672/sales_ai_vhost
-      REDIS_URL: redis://redis:6379
-      JWT_SECRET: your-super-secret-jwt-key-change-in-production
-    depends_on:
-      postgres:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    volumes:
-      - ./svc-api:/app
-      - /app/node_modules
-
-  # Authentication Service
-  svc-auth:
-    build:
-      context: ./svc-auth
-      dockerfile: Dockerfile
-    container_name: sales-ai-auth
-    ports:
-      - "3001:3001"
-    environment:
-      NODE_ENV: development
-      PORT: 3001
-      DATABASE_URL: postgresql://sales_ai_user:sales_ai_password@postgres:5432/sales_ai_platform
-      JWT_SECRET: your-super-secret-jwt-key-change-in-production
-    depends_on:
-      postgres:
-        condition: service_healthy
-    volumes:
-      - ./svc-auth:/app
-      - /app/node_modules
-
-  # Frontend Dashboard
-  webapp-dashboard:
-    build:
-      context: ./webapp-dashboard
-      dockerfile: Dockerfile
-    container_name: sales-ai-webapp
-    ports:
-      - "3002:3002"
-    environment:
-      NODE_ENV: development
-      PORT: 3002
-      REACT_APP_API_URL: http://localhost:3000
-      REACT_APP_AUTH_URL: http://localhost:3001
-    depends_on:
-      - svc-api
-      - svc-auth
-    volumes:
-      - ./webapp-dashboard:/app
-      - /app/node_modules
 
 volumes:
   postgres_data:

@@ -1,0 +1,13 @@
+packages:
+  - 'webapp-dashboard'
+  - 'svc-api'
+  - 'svc-auth'
+  - 'svc-orchestrator'
+  - 'svc-qualifier'
+  - 'svc-engagement'
+  - 'svc-followup'
+  - 'svc-closer'
+  - 'svc-analytics'
+  - 'svc-scheduler'
+  - 'lib-shared'
+  - 'infra-migrations'

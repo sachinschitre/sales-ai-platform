@@ -18,7 +18,7 @@
     "infra-migrations"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:auth\" \"npm run dev:orchestrator\" \"npm run dev:qualifier\" \"npm run dev:engagement\" \"npm run dev:followup\" \"npm run dev:closer\" \"npm run dev:analytics\" \"npm run dev:scheduler\" \"npm run dev:webapp\"",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:webapp\"",
     "dev:api": "cd svc-api && npm run dev",
     "dev:auth": "cd svc-auth && npm run dev",
     "dev:orchestrator": "cd svc-orchestrator && npm run dev",
@@ -41,9 +41,9 @@
     "db:reset": "cd infra-migrations && npm run db:reset",
     "db:migrate": "cd infra-migrations && npm run migrate",
     "db:seed": "cd infra-migrations && npm run seed",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
     "lint": "npm run lint --workspaces --if-present",
     "lint:fix": "npm run lint:fix --workspaces --if-present",
     "format": "npm run format --workspaces --if-present",
